@@ -1,0 +1,13 @@
+name: 01-dispatch
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  dispatch-01:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hola Pipe
+        run: echo "Hola Pipe"
