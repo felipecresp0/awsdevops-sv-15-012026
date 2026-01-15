@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modo Descanso Activado</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --text-color: #e2e8f0;
+            --accent-color: #818cf8;
+            --glass-bg: rgba(30, 41, 59, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background: radial-gradient(circle at top right, #1e1b4b, #0f172a);
+        }
+
+        .container {
+            text-align: center;
+            padding: 3rem;
+            max-width: 600px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1.5s ease-out;
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #a5b4fc 0%, #6366f1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.05em;
+        }
+
+        p {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            color: #94a3b8;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .sleep-btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: white;
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.4);
+        }
+
+        .sleep-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(79, 70, 229, 0.5);
+            filter: brightness(1.1);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .zzz {
+            position: absolute;
+            color: var(--accent-color);
+            font-weight: bold;
+            opacity: 0;
+            animation: floatZ 4s infinite;
+        }
+
+        @keyframes floatZ {
+            0% {
+                opacity: 0;
+                transform: translate(0, 0) scale(0.5);
+            }
+
+            20% {
+                opacity: 0.8;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(20px, -50px) scale(1.5);
+            }
+        }
+
+        /* Background Stars */
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.2;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0.2;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.8;
+                transform: scale(1.2);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Stars Background -->
+    <div id="stars"></div>
+
+    <div class="container">
+        <h1>Tengo Sueño...</h1>
+        <p>El café ya no hace efecto. Mis párpados pesan toneladas. <br>Es hora de cerrar las pestañas del navegador y
+            las de mis ojos.</p>
+
+        <div style="position: relative; display: inline-block;">
+            <a href="#" class="sleep-btn" onclick="goToSleep()">Ir a Dormir</a>
+            <!-- Floating Zzz's will be added here via JS -->
+        </div>
+    </div>
+
+    <script>
+        // Create random stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 50; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.width = Math.random() * 3 + 'px';
+            star.style.height = star.style.width;
+            star.style.left = Math.random() * 100 + 'vw';
+            star.style.top = Math.random() * 100 + 'vh';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // Floating Zzz animation effect
+        function createZzz() {
+            const container = document.querySelector('.container');
+            const zzz = document.createElement('div');
+            zzz.className = 'zzz';
+            zzz.textContent = 'Zzz';
+
+            // Random position near the center/button
+            const left = 50 + (Math.random() * 40 - 20);
+            const top = 40;
+
+            zzz.style.left = left + '%';
+            zzz.style.top = top + '%';
+            zzz.style.fontSize = (Math.random() * 1 + 1) + 'rem';
+
+            container.appendChild(zzz);
+
+            setTimeout(() => {
+                zzz.remove();
+            }, 4000);
+        }
+
+        setInterval(createZzz, 800);
+
+        function goToSleep() {
+            document.body.style.transition = "background-color 2s, opacity 2s";
+            document.body.style.backgroundColor = "black";
+            document.body.style.opacity = "0";
+            setTimeout(() => {
+                alert("Buenas noches... 😴");
+                location.reload();
+            }, 2000);
+        }
+    </script>
+</body>
+
+</html>

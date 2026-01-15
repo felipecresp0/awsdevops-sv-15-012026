@@ -1,0 +1,14 @@
+name: 04-filtrado
+on:
+    push:
+        branches:
+            - master
+        paths:
+            - web/**
+
+jobs:
+    web-changes:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              run: echo "Hola cambios en la web"

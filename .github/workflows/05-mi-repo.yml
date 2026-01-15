@@ -1,0 +1,16 @@
+name: 05-mi-repo
+on:
+    push:
+        branches:
+            - master
+        paths:
+            - web/**
+
+jobs:
+    usar-repo:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Descargar repo
+              uses: actions/checkout@v4
+            - name: Mostrar archivos
+              run: echo "Hola pipePush"
