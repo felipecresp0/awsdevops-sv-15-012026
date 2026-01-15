@@ -1,0 +1,12 @@
+name: 02-push
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    push-01:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Hola pipePush
+              run: echo "Hola pipePush"

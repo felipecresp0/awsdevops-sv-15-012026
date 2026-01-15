@@ -1,0 +1,18 @@
+name: 02-runner
+on:
+    push:
+
+jobs:
+    runner-01:
+        runs-on: ubuntu-latest
+        steps:
+            - name: ¿Quien soy?
+              run: |
+                  whoami
+                  pwd
+            - name: ¿Donde estoy?
+              run: |
+                  ls
+                  ls -la
+            - name: Mensaje de bienvenida
+              run: echo "Hola, bienvenido al runner"
